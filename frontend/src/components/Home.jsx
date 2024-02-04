@@ -1,23 +1,68 @@
-import { useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 
 function Home() {
 
+    const [archivo, setArchivo] = useState(null);
+    const [avatar, setAvatar] = useState("/imagenes/avatar.jpg");
 
-    const avatar = "/imagenes/avatar.jpg";
+    
 
 
-    function controlCambioImagen(){
+    function controlCambioImagen(event){
+        
+        const archivoSubido = event.target.files[0]; // imagen
+
+        if(archivoSubido){
+            const fileName = archivoSubido.name.toLowerCase();
+            
+            // Solamente archivos jpg
+            if(fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg')){setArchivo(archivoSubido);} // si es jpg, entonces guardamos en archivo.
+            else{ console.log("sube un archivo .jpg");}
+        }
+    }
+
+
+    async function controlSubida(event){
+        event.preventDefault(); 
+
+        if(!archivo){console.log("sube un archivo");}
+        else{
+            const formData = new FormData();
+            formData.append('file', archivo);
+
+            // Enviar la imagen al servidor
+            await axios.post("/subida", formData, {
+                headers: {'Content-Type': 'multipart/form-data',},
+            })
+            .then(async function(response){
+                console.log(response);
+
+                if(response.status===200){
+                    console.log("exito"); 
+                    let urlImagen = response.data.urlImagen; 
+                    setAvatar(urlImagen);
+                }
+                else{ console.log("error");  }
+            });
+        }
 
     }
 
-    function controlSubida(){
-
-    }
-
-    function controlEliminar(){
-
+    async function controlEliminar(){
+        await axios.post("/eliminar")
+        .then(async function(response){
+            console.log(response);
+            if(response===200){
+                console.log("imagen eliminada correctamente");
+                setAvatar("/imagenes/avatar.jpg");
+            }
+            else{
+                console.log("error");
+            }
+        })
+    
     }
 
     return(
