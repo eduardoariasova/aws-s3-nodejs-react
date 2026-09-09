@@ -66,8 +66,8 @@ app.post("/subida", function(req, res){
 
 
 app.post("/eliminar", function(req, res){
-  let bucket = "bucket-avatar";
-  let carpetaInternaBucket = "imagenes/miavatar.jpg";
+  let bucket = process.env.NOMBREBUCKET;
+  let carpetaInternaBucket = "imagenes/cursos/miavatar.jpg";
   
 
   let paramsBorrar = {
@@ -82,6 +82,10 @@ app.post("/eliminar", function(req, res){
     console.log(response);
     return res.status(200).json({mensaje: "archivo borrado correctamente"});
   })
+  .catch((error) =>{
+    console.log("error al eliminar la imagen, ", error);
+    return res.status(400).json({mensaje: "error al ejecutar comando, por favor intentar nuevamente"});
+  });
 
 });
 
