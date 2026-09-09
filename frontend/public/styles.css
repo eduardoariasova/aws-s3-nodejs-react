@@ -1,6 +1,45 @@
+body {
+    background: linear-gradient(180deg, #f5f7fa 0%, #e9edf3 100%);
+    min-height: 100vh;
+}
 
+.tarjetaSubida {
+    max-width: 460px;
+    margin: 0 auto;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 18px 45px rgba(20, 30, 60, 0.12);
+    overflow: hidden;
+}
 
-.claseAvatar{
-    border-radius: 50%; 
-    width: 300px; height: 300px;    
+.tarjetaSubida .card-header {
+    background: linear-gradient(135deg, #ff9900 0%, #ff6a00 100%);
+    color: #fff;
+    border: none;
+    padding: 1.4rem 1rem;
+}
+
+.avatarWrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.claseAvatar {
+    border-radius: 50%;
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border: 6px solid #fff;
+    box-shadow: 0 10px 30px rgba(20, 30, 60, 0.18);
+    transition: transform 0.25s ease;
+}
+
+.claseAvatar:hover {
+    transform: scale(1.03);
+}
+
+.nombreArchivo {
+    font-size: 0.85rem;
+    color: #6c757d;
+    word-break: break-all;
 }

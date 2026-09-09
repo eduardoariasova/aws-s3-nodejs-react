@@ -15,7 +15,7 @@ const sharp = require('sharp');
 
 // AWS S3 ///////////////////////////////////////////////////
 // CONFIGURAR S3
-const miRegion = 'us-east-2';
+const miRegion = 'us-east-1';
 let s3 = new S3Client({
   region: miRegion,
   credentials: {
@@ -27,8 +27,8 @@ let s3 = new S3Client({
 
 
 app.post("/subida", function(req, res){
-  let bucket = "bucket-avatar";
-  let carpetaInternaBucket = "imagenes/miavatar.jpg";
+  let bucket = process.env.NOMBREBUCKET;
+  let carpetaInternaBucket = "imagenes/cursos/miavatar.jpg";
   let urlImagen = "https://" + bucket + ".s3." + miRegion + ".amazonaws.com/" + carpetaInternaBucket; // ruta de imagen
   // Multer
   const storage = multer.memoryStorage(); // multer almacena el archivo de forma temporal.
