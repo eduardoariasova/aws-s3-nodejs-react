@@ -64,7 +64,7 @@ app.post("/subida", function(req, res){
   });
 });
 
-
+ 
 app.post("/eliminar", function(req, res){
   let bucket = process.env.NOMBREBUCKET;
   let carpetaInternaBucket = "imagenes/cursos/miavatar.jpg";
