@@ -1,6 +1,5 @@
 // server/index.jscle
 const path = require("path");
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const express = require("express");
 const app = express();
 // Hacer que node sirva los archivos de nuestro app React
@@ -130,7 +129,7 @@ app.get('*', (req, res) => {
 });
 
 // Listen /////////////////////////////////////
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
